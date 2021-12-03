@@ -1,0 +1,5 @@
+# 忽略main.go文件
+main.go
+
+# 忽略.idea文件夹
+.idea/
