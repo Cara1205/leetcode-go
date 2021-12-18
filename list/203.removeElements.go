@@ -13,6 +13,7 @@ type ListNode struct {
 }
 
 func removeElements(head *ListNode, val int) *ListNode {
+	// 方法一：就地删除（第一个元素单独处理）
 	if head == nil {
 		return head
 	}
@@ -34,4 +35,37 @@ func removeElements(head *ListNode, val int) *ListNode {
 		}
 	}
 	return newHead
+}
+
+func removeElements2(head *ListNode, val int) *ListNode {
+	//方法二：新建头结点，把链表当做带头结点处理
+	if head == nil {
+		return head
+	}
+	headNode := &ListNode{}     //新建头结点
+	headNode.Next = head
+	pre := headNode
+	cur := headNode.Next
+	for cur != nil {
+		if cur.Val == val {     //删除等于val的结点
+			pre.Next = cur.Next
+			cur = cur.Next
+		} else {
+			pre = cur
+			cur = cur.Next
+		}
+	}
+	return headNode.Next
+}
+
+func removeElements3(head *ListNode, val int) *ListNode {
+	//方法三：递归。子链表 移除值等于val的结点
+	if head == nil {
+		return head
+	}
+	head.Next = removeElements(head.Next, val)
+	if head.Val == val {
+		return head.Next
+	}
+	return head
 }
