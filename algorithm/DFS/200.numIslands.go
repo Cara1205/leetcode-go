@@ -7,19 +7,17 @@ package DFS
 * @Date:   2021/12/19 23:47
  */
 
-// 存在问题：本地IDE可正常运行，力扣上执行总为0
-var res1 int
 func numIslands(grid [][]byte) int {
-	res1 = 0
+	res := 0
 	for i := 0; i < len(grid); i++ {
 		for j := 0; j < len(grid[0]); j++ {
-			if grid[i][j] == byte(1) {
+			if grid[i][j] == '1' {
 				dfs(grid, i, j)
-				res1 = res1 + 1
+				res = res + 1
 			}
 		}
 	}
-	return res1
+	return res
 }
 func dfs(grid [][]byte, row, column int) {
 	// row: 指向当前行
@@ -29,12 +27,12 @@ func dfs(grid [][]byte, row, column int) {
 		return
 	}
 
-	if (grid[row][column] != byte(1)) {
+	if (grid[row][column] != '1') {
 		// 如果该格子不是岛屿，直接返回
 		return
 	}
 	// 是格子的，则将值置为2，表示已遍历过
-	grid[row][column] = byte(2)
+	grid[row][column] = '2'
 
 	// 遍历上、下、左、右四个方向的格子
 	dfs(grid, row-1, column)
